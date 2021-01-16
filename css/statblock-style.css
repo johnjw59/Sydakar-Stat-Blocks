@@ -7,7 +7,7 @@
     width: 400px;
     background: #FDF1DC;
     background-size: cover;
-	background-position: center; 
+	background-position: center;
     background-image: url('../dndimages/statblockparch.jpg');
     padding: 10px 10px 20px;
     box-sizing: border-box;
@@ -55,7 +55,7 @@
     display: block;
     background: #E69A28;
     background-size: cover;
-	background-position: center; 
+	background-position: center;
     background-image: url('../dndimages/statblockbar.jpg');
     border: 1px solid #000;
     height: 5px;
@@ -129,14 +129,15 @@
 }
 
 .scores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     text-align: center;
     color: #922610;
 }
 
 .scores>div {
-    display: inline-block;
-    vertical-align: middle;
-    width: 15.5%;
+    width: 20.5%;
     min-width: 40px;
     font-size: 12px;
     line-height: 1em;

@@ -65,10 +65,14 @@
                                     <h4>STR</h4>
                                     <p id="strpts"></p>
                                 </div> <!-- scores strength -->
-                                <div class="scores-dexterity">
-                                    <h4>DEX</h4>
-                                    <p id="dexpts"></p>
-                                </div> <!-- scores dexterity -->
+                                <div class="scores-agility">
+                                    <h4>AGI</h4>
+                                    <p id="agipts"></p>
+                                </div> <!-- scores agility -->
+                                <div class="scores-perception">
+                                    <h4>PER</h4>
+                                    <p id="perpts"></p>
+                                </div> <!-- scores perception -->
                                 <div class="scores-constitution">
                                     <h4>CON</h4>
                                     <p id="conpts"></p>
@@ -77,14 +81,18 @@
                                     <h4>INT</h4>
                                     <p id="intpts"></p>
                                 </div> <!-- scores intelligence -->
-                                <div class="scores-wisdom">
-                                    <h4>WIS</h4>
-                                    <p id="wispts"></p>
-                                </div> <!-- scores wisdom -->
+                                <div class="scores-insight">
+                                    <h4>INS</h4>
+                                    <p id="inspts"></p>
+                                </div> <!-- scores insight -->
                                 <div class="scores-charisma">
                                     <h4>CHA</h4>
                                     <p id="chapts"></p>
                                 </div> <!-- scores charisma -->
+                                <div class="scores-affinity">
+                                    <h4>AFF</h4>
+                                    <p id="affpts"></p>
+                                </div> <!-- scores affinity -->
                             </div> <!-- scores -->
                             <svg height="5" width="100%" class="tapered-rule">
                                 <polyline points="0,0 400,2.5 0,5"></polyline>
@@ -257,21 +265,25 @@
                         <td><label for="str-input">STR: <br><input type="number" id="str-input" min="1" max="99"
                                     value="10" onchange="FormFunctions.ChangeBonus('str')"> (<span
                                     id="strbonus"></span>)</label></td>
-                        <td><label for="dex-input">DEX: <br><input type="number" id="dex-input" min="1" max="99"
-                                    value="10" onchange="FormFunctions.ChangeBonus('dex')"> (<span
-                                    id="dexbonus"></span>)</label></td>
+                        <td><label for="agi-input">AGI: <br><input type="number" id="agi-input" min="1" max="99"
+                                    value="10" onchange="FormFunctions.ChangeBonus('agi')"> (<span
+                                    id="agibonus"></span>)</label></td>
+                        <td><label for="per-input">PER: <br><input type="number" id="per-input" min="1" max="99" value="10"
+                                    onchange="FormFunctions.ChangeBonus('per')"> (<span id="perbonus"></span>)</label></td>
                         <td><label for="con-input">CON: <br><input type="number" id="con-input" min="1" max="99"
                                     value="10" onchange="FormFunctions.ChangeBonus('con')"> (<span
                                     id="conbonus"></span>)</label></td>
                         <td><label for="int-input">INT: <br><input type="number" id="int-input" min="1" max="99"
                                     value="10" onchange="FormFunctions.ChangeBonus('int')"> (<span
                                     id="intbonus"></span>)</label></td>
-                        <td><label for="wis-input">WIS: <br><input type="number" id="wis-input" min="1" max="99"
-                                    value="10" onchange="FormFunctions.ChangeBonus('wis')"> (<span
-                                    id="wisbonus"></span>)</label></td>
+                        <td><label for="ins-input">INS: <br><input type="number" id="ins-input" min="1" max="99"
+                                    value="10" onchange="FormFunctions.ChangeBonus('ins')"> (<span
+                                    id="insbonus"></span>)</label></td>
                         <td><label for="cha-input">CHA: <br><input type="number" id="cha-input" min="1" max="99"
                                     value="10" onchange="FormFunctions.ChangeBonus('cha')"> (<span
                                     id="chabonus"></span>)</label></td>
+                        <td><label for="aff-input">AFF: <br><input type="number" id="aff-input" min="1" max="99" value="10"
+                                    onchange="FormFunctions.ChangeBonus('aff')"> (<span id="affbonus"></span>)</label></td>
                     </tr>
                 </table>
                 <hr>

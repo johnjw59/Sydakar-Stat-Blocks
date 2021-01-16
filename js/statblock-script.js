@@ -22,11 +22,13 @@ var mon = {
     hpText: "4 (1d8)",
     speedDesc: "30 ft.",
     strPoints: 10,
-    dexPoints: 10,
+    agiPoints: 10,
+    perPoints: 10,
     conPoints: 10,
     intPoints: 10,
-    wisPoints: 10,
+    insPoints: 10,
     chaPoints: 10,
+    affPoints: 10,
     blindsight: 0,
     blind: false,
     darkvision: 0,
@@ -176,11 +178,13 @@ function UpdateStatblock(moveSeparationPoint) {
     let setPts = (id, pts) =>
         $(id).html(pts + " (" + StringFunctions.RemoveHtmlTags(StringFunctions.BonusFormat(MathFunctions.PointsToBonus(pts))) + ")");
     setPts("#strpts", mon.strPoints);
-    setPts("#dexpts", mon.dexPoints);
+    setPts("#agipts", mon.agiPoints);
+    setPts("#perpts", mon.perPoints);
     setPts("#conpts", mon.conPoints);
     setPts("#intpts", mon.intPoints);
-    setPts("#wispts", mon.wisPoints);
+    setPts("#inspts", mon.insPoints);
     setPts("#chapts", mon.chaPoints);
+    setPts("#affpts", mon.affPoints);
 
     let propertiesDisplayArr = StringFunctions.GetPropertiesDisplayArr();
 
@@ -216,7 +220,7 @@ function UpdateStatblock(moveSeparationPoint) {
         AddToTraitList(traitsHTML, mon.regionals, mon.regionalDescription == "" ? "<h3>Regional Effects</h3>" : ["<h3>Regional Effects</h3><div class='property-block'>", ReplaceTags(StringFunctions.RemoveHtmlTags(mon.regionalDescription)), "</div></br><ul>"], false, true);
         traitsHTML.push("</ul>" + ReplaceTags(mon.regionalDescriptionEnd));
     }
-    
+
     // Add traits, taking into account the width of the block (one column or two columns)
     let leftTraitsArr = [],
         rightTraitsArr = [],
@@ -382,11 +386,13 @@ function TryMarkdown() {
         markdown.push(' (', mon.tag, ')');
     markdown.push(', ', mon.alignment, '*<br>>___<br>> - **Armor Class** ', StringFunctions.FormatString(StringFunctions.GetArmorData()), '<br>> - **Hit Points** ', StringFunctions.GetHP(), '<br>> - **Speed** ', StringFunctions.GetSpeed(), "<br>>___<br>>|STR|DEX|CON|INT|WIS|CHA|<br>>|:---:|:---:|:---:|:---:|:---:|:---:|<br>>|",
         mon.strPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.strPoints)), ")|",
-        mon.dexPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.dexPoints)), ")|",
+        mon.agiPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.agiPoints)), ")|",
+        mon.perPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.perPoints)), ")|",
         mon.conPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.conPoints)), ")|",
         mon.intPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.intPoints)), ")|",
-        mon.wisPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.wisPoints)), ")|",
-        mon.chaPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.chaPoints)), ")|<br>>___<br>");
+        mon.insPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.insPoints)), ")|",
+        mon.chaPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.chaPoints)), ")|",
+        mon.affPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.affPoints)), ")|<br>>___<br>");
 
     let propertiesDisplayArr = StringFunctions.GetPropertiesDisplayArr();
 
@@ -483,11 +489,13 @@ var FormFunctions = {
 
         // Stats
         this.SetStatForm("str", mon.strPoints);
-        this.SetStatForm("dex", mon.dexPoints);
+        this.SetStatForm("agi", mon.agiPoints);
+        this.SetStatForm("per", mon.perPoints);
         this.SetStatForm("con", mon.conPoints);
         this.SetStatForm("int", mon.intPoints);
-        this.SetStatForm("wis", mon.wisPoints);
+        this.SetStatForm("ins", mon.insPoints);
         this.SetStatForm("cha", mon.chaPoints);
+        this.SetStatForm("aff", mon.affPoints);
 
         // Senses
         $("#blindsight-input").val(mon.blindsight);
@@ -517,15 +525,15 @@ var FormFunctions = {
         this.MakeDisplayList("lairs", false, true);
         this.MakeDisplayList("regionals", false, true);
 
-        // Is Legendary?	
+        // Is Legendary?
         $("#is-legendary-input").prop("checked", mon.isLegendary);
         this.ShowHideLegendaryCreature();
 
-        // Is Lair?	
+        // Is Lair?
         $("#has-lair-input").prop("checked", mon.isLair);
         this.ShowHideLair();
 
-        // Is Regional?	
+        // Is Regional?
         $("#has-regional-input").prop("checked", mon.isRegional);
         this.ShowHideRegional();
 
@@ -921,13 +929,15 @@ var GetVariablesFunctions = {
         mon.speedDesc = $("#custom-speed-prompt").val();
         mon.customSpeed = $("#custom-speed-input").prop("checked");
 
-        // Stats	
+        // Stats
         mon.strPoints = $("#str-input").val();
-        mon.dexPoints = $("#dex-input").val();
+        mon.agiPoints = $("#agi-input").val();
+        mon.perPoints = $("#per-input").val();
         mon.conPoints = $("#con-input").val();
         mon.intPoints = $("#int-input").val();
-        mon.wisPoints = $("#wis-input").val();
+        mon.insPoints = $("#ins-input").val();
         mon.chaPoints = $("#cha-input").val();
+        mon.affPoints = $("#aff-input").val();
 
         // Senses
         mon.blindsight = $("#blindsight-input").val();
@@ -982,11 +992,13 @@ var GetVariablesFunctions = {
 
         // Stats
         mon.strPoints = preset.strength;
-        mon.dexPoints = preset.dexterity;
+        mon.agiPoints = preset.agility;
+        mon.perPoints = preset.perception;
         mon.conPoints = preset.constitution;
         mon.intPoints = preset.intelligence;
-        mon.wisPoints = preset.wisdom;
+        mon.insPoints = preset.insight;
         mon.chaPoints = preset.charisma;
+        mon.affPoints = preset.affinity;
 
         // CR
         mon.cr = preset.challenge_rating;
