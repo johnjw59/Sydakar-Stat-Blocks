@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>D&amp;D 5e Statblock Generator</title>
+    <title>Sydakar Statblock Generator</title>
     <link rel="shortcut icon" type="image/x-icon" href="dndimages/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/statblock-style.css">
@@ -46,7 +46,7 @@
                         </svg>
                         <div class="top-stats">
                             <div class="property-line first">
-                                <h4>Armor Class</h4>
+                                <h4>Armor Value</h4>
                                 <p id="armor-class"></p>
                             </div> <!-- property line -->
                             <div class="property-line">
@@ -137,34 +137,16 @@
                                     value="Monster"></label>
                         </td>
                         <td>
-                            <label for="size-input">Size: <br>
-                                <select id="size-input">
-                                    <option value="tiny">Tiny</option>
-                                    <option value="small">Small</option>
-                                    <option value="medium" selected="selected">Medium</option>
-                                    <option value="large">Large</option>
-                                    <option value="huge">Huge</option>
-                                    <option value="gargantuan">Gargantuan</option>
-                                </select>
-                            </label>
-                        </td>
-                        <td>
                             <label for="type-input">Type: <br>
                                 <select id="type-input" onchange="FormFunctions.ShowHideTypeOther()">
-                                    <option value="aberration">Aberration</option>
                                     <option value="beast">Beast</option>
-                                    <option value="celestial">Celestial</option>
-                                    <option value="construct">Construct</option>
-                                    <option value="dragon">Dragon</option>
+                                    <option value="dovakin">Dovakin</option>
                                     <option value="elemental">Elemental</option>
-                                    <option value="fey">Fey</option>
-                                    <option value="fiend">Fiend</option>
-                                    <option value="giant">Giant</option>
                                     <option value="humanoid" selected>Humanoid</option>
-                                    <option value="monstrosity">Monstrosity</option>
-                                    <option value="ooze">Ooze</option>
                                     <option value="plant">Plant</option>
+                                    <option value="skria">Skria</option>
                                     <option value="undead">Undead</option>
+                                    <option value="vampire">Vampire</option>
                                     <option value="*">Other</option>
                                 </select>
                             </label>
@@ -183,47 +165,28 @@
                 <hr>
                 <table id="armor-hitdice-form">
                     <tr>
-                        <td></td>
                         <td>
-                            <div id="hitdice-input-prompt"><label for="hitdice-input">Hit Dice: <br><input type="number"
-                                        id="hitdice-input" min="1" max="99" value="5"></label></div>
-                            <div id="hp-text-input-prompt"><label for="hp-text-input">Hit Points:<br><input
-                                        id="hp-text-input" value="4 (1d8)"></label></div>
-                            <div id="custom-hp-box-prompt" class="box-note"><label for="custom-hp-input">(Custom HP:
-                                    <input id="custom-hp-input" type="checkbox"
-                                        onchange="FormFunctions.ShowHideCustomHP()">)</label></div>
+                            <label for="size-input">Size: <br>
+                                <select id="size-input" onChange="FormFunctions.UpdateHitDie()">
+                                    <option value="0">Miniscule</option>
+                                    <option value="2">Tiny</option>
+                                    <option value="4">Small</option>
+                                    <option value="6" selected="selected">Medium</option>
+                                    <option value="10">Large</option>
+                                    <option value="14">Huge</option>
+                                    <option value="20">Enormous</option>
+                                    <option value="30">Colossal</option>
+                                </select>
+                            </label>
+                            <div id="size-hit-die" class="box-note">Hit Die: 6</div>
                         </td>
                         <td>
-                            <label for="armor-input">Armor Type: <br>
-                                <select id="armor-input" onchange="FormFunctions.ShowHideOtherArmor()">
-                                    <option value="none" selected>None</option>
-                                    <option value="natural armor">Natural Armor</option>
-                                    <option value="mage armor">Mage Armor</option>
-                                    <option value="padded armor">Padded</option>
-                                    <option value="leather armor">Leather</option>
-                                    <option value="studded leather">Studded Leather</option>
-                                    <option value="hide armor">Hide</option>
-                                    <option value="chain shirt">Chain Shirt</option>
-                                    <option value="scale mail">Scale Mail</option>
-                                    <option value="breastplate">Breastplate</option>
-                                    <option value="half plate">Half Plate</option>
-                                    <option value="ring mail">Ring Mail</option>
-                                    <option value="chain mail">Chain Mail</option>
-                                    <option value="splint">Splint</option>
-                                    <option value="plate">Plate</option>
-                                    <option value="other">Other</option>
-                                </select></label>
-                            <div id="shield-box-note" class="box-note"><label for="shield-input">(Shield: <input
-                                        id="shield-input" type="checkbox">)</label></div>
-                        </td>
-                        <td colspan="2">
-                            <div id="natarmor-prompt"><label for="natarmor-input">Natural Armor Bonus:<br><input
-                                        type="number" id="natarmor-input" min="1" max="99" value="3"></label></div>
-                            <div id="otherarmor-prompt">
-                                <label for="otherarmor-input">Description: <input id="otherarmor-input" type="text"
-                                        value="10 (armor)"></label><br>
-                                <div id="otherarmor-box-note" class="box-note"><i>Use _ to italicize</i></div>
-                            </div>
+                            <div id="hp-custom-input-prompt"><label for="hp-custom-input">Hit Points:<br><input
+                                        id="hp-custom-input" type="number" min="0"></label></div>
+                            <div class="box-note">Leave empty to calculate health automatically.</div>
+                        <td>
+                            <label for="armor-input">Armor Value: <br>
+                                <input id="armor-input" type="number" min="0" max="99"></label>
                         </td>
                     </tr>
                 </table>
@@ -231,24 +194,24 @@
                 <table id="monster-speed-form">
                     <tr>
                         <td class="normal-speed-col"><label for="speed-input">Speed:<br><input type="number"
-                                    id="speed-input" min="0" max="995" step="5" value="30"> ft.</label></td>
+                                    id="speed-input" min="0" max="995" step="5" value="30"> m.</label></td>
                         <td class="normal-speed-col"><label for="burrow-speed-input">Burrow Speed:<br><input
                                     type="number" id="burrow-speed-input" min="0" max="995" step="5" value="0">
-                                ft.</label></td>
+                                m.</label></td>
                         <td class="normal-speed-col"><label for="climb-speed-input">Climb Speed:<br><input type="number"
-                                    id="climb-speed-input" min="0" max="995" step="5" value="0"> ft.</label></td>
+                                    id="climb-speed-input" min="0" max="995" step="5" value="0"> m.</label></td>
                         <td class="normal-speed-col">
                             <label for="fly-speed-input">Fly Speed:<br><input type="number" id="fly-speed-input" min="0"
                                     max="995" step="5" value="0" onchange="FormFunctions.ShowHideHoverBox()">
-                                ft.</label>
+                                m.</label>
                             <div id="hover-box-note" class="box-note"><label for="hover-input">(Hover: <input
                                         type="checkbox" id="hover-input">)</label></div>
                         </td>
                         <td class="normal-speed-col"><label for="swim-speed-input">Swim Speed:<br><input type="number"
-                                    id="swim-speed-input" min="0" max="995" step="5" value="0"> ft.</label></td>
+                                    id="swim-speed-input" min="0" max="995" step="5" value="0"> m.</label></td>
                         <td colspan="5" class="custom-speed-col">
                             <label for="custom-speed-prompt" style="width: 100%;">Speed: <input id="custom-speed-prompt"
-                                    type="text" value="30 ft."></label><br>
+                                    type="text" value="30 m."></label><br>
                         </td>
                         <td>
                             <br>
@@ -262,69 +225,35 @@
                 <hr>
                 <table id="monster-stats-form">
                     <tr>
-                        <td><label for="str-input">STR: <br><input type="number" id="str-input" min="1" max="99"
-                                    value="10" onchange="FormFunctions.ChangeBonus('str')"> (<span
-                                    id="strbonus"></span>)</label></td>
-                        <td><label for="agi-input">AGI: <br><input type="number" id="agi-input" min="1" max="99"
-                                    value="10" onchange="FormFunctions.ChangeBonus('agi')"> (<span
-                                    id="agibonus"></span>)</label></td>
-                        <td><label for="per-input">PER: <br><input type="number" id="per-input" min="1" max="99" value="10"
-                                    onchange="FormFunctions.ChangeBonus('per')"> (<span id="perbonus"></span>)</label></td>
-                        <td><label for="con-input">CON: <br><input type="number" id="con-input" min="1" max="99"
-                                    value="10" onchange="FormFunctions.ChangeBonus('con')"> (<span
-                                    id="conbonus"></span>)</label></td>
-                        <td><label for="int-input">INT: <br><input type="number" id="int-input" min="1" max="99"
-                                    value="10" onchange="FormFunctions.ChangeBonus('int')"> (<span
-                                    id="intbonus"></span>)</label></td>
-                        <td><label for="ins-input">INS: <br><input type="number" id="ins-input" min="1" max="99"
-                                    value="10" onchange="FormFunctions.ChangeBonus('ins')"> (<span
-                                    id="insbonus"></span>)</label></td>
-                        <td><label for="cha-input">CHA: <br><input type="number" id="cha-input" min="1" max="99"
-                                    value="10" onchange="FormFunctions.ChangeBonus('cha')"> (<span
-                                    id="chabonus"></span>)</label></td>
-                        <td><label for="aff-input">AFF: <br><input type="number" id="aff-input" min="1" max="99" value="10"
-                                    onchange="FormFunctions.ChangeBonus('aff')"> (<span id="affbonus"></span>)</label></td>
+                        <td><label for="str-input">STR: <br><input type="number" id="str-input" min="1" max="99" value="5"></label></td>
+                        <td><label for="agi-input">AGI: <br><input type="number" id="agi-input" min="1" max="99" value="5"></label></td>
+                        <td><label for="per-input">PER: <br><input type="number" id="per-input" min="1" max="99" value="5"></label></td>
+                        <td><label for="con-input">CON: <br><input type="number" id="con-input" min="1" max="99" value="5"></label></td>
+                        <td><label for="int-input">INT: <br><input type="number" id="int-input" min="1" max="99" value="5"></label></td>
+                        <td><label for="ins-input">INS: <br><input type="number" id="ins-input" min="1" max="99" value="5"></label></td>
+                        <td><label for="cha-input">CHA: <br><input type="number" id="cha-input" min="1" max="99" value="5"></label></td>
+                        <td><label for="aff-input">AFF: <br><input type="number" id="aff-input" min="1" max="99" value="5"></label></td>
                     </tr>
                 </table>
                 <hr>
                 <table id="properties-lists-form">
                     <tr>
-                        <td id="sthrows-form">
-                            <label for="sthrows-input">Saving Throws:</label><br>
-                            <select id="sthrows-input">
-                                <option value="str">Strength</option>
-                                <option value="dex">Dexterity</option>
-                                <option value="con">Constitution</option>
-                                <option value="int">Intelligence</option>
-                                <option value="wis">Wisdom</option>
-                                <option value="cha">Charisma</option>
-                            </select>
-                            <button type="button" onclick="InputFunctions.AddSthrowInput()">Proficient</button>
-                            <div id="sthrows-input-section">
-                                <ul id="sthrows-input-list" class="statblock-list"></ul>
-                            </div>
-                        </td>
                         <td id="skills-form">
                             <label for="skills-input">Skills:</label><br>
                             <select id="skills-input">
-                                <option value="acrobatics">Acrobatics</option>
-                                <option value="animal Handling">Animal Handling</option>
-                                <option value="arcana">Arcana</option>
-                                <option value="athletics">Athletics</option>
-                                <option value="deception">Deception</option>
-                                <option value="history">History</option>
-                                <option value="insight">Insight</option>
-                                <option value="intimidation">Intimidation</option>
-                                <option value="investigation">Investigation</option>
-                                <option value="medicine">Medicine</option>
-                                <option value="nature">Nature</option>
-                                <option value="perception">Perception</option>
-                                <option value="performance">Performance</option>
-                                <option value="persuasion">Persuasion</option>
-                                <option value="religion">Religion</option>
-                                <option value="sleight of Hand">Sleight of Hand</option>
-                                <option value="stealth">Stealth</option>
-                                <option value="survival">Survival</option>
+                                <option value="analysis">Analysis</option>
+                                <option value="concealable weapons">Concealable Weapons</option>
+                                <option value="essence">Essence</option>
+                                <option value="manipulation">Manipulation</option>
+                                <option value="martial weapons">Martial Weapons</option>
+                                <option value="misdirection">Misdirection</option>
+                                <option value="physical skills">Physical Skills</option>
+                                <option value="ranged weapons">Ranged Weapons</option>
+                                <option value="scholar">Scholar</option>
+                                <option value="scoundrel">Scoundrel</option>
+                                <option value="scouting">Scouting</option>
+                                <option value="spellcasting">Spellcasting</option>
+                                <option value="wilderness">Wilderness</option>
                             </select>
                             <button type="button" onclick="InputFunctions.AddSkillInput()">Proficient</button>
                             <button type="button" onclick="InputFunctions.AddSkillInput(' (ex)')">Expert</button>
@@ -336,20 +265,21 @@
                             <label for="conditions-input">Condition Immunities: </label><br>
                             <select id="conditions-input">
                                 <option value="blinded">Blinded</option>
-                                <option value="charmed">Charmed</option>
+                                <option value="burning">Burning</option>
+                                <option value="confused">Confused</option>
+                                <option value="dazed">Dazed</option>
                                 <option value="deafened">Deafened</option>
-                                <option value="exhaustion">Exhaustion</option>
+                                <option value="fatigued">Fatigued</option>
                                 <option value="frightened">Frightened</option>
-                                <option value="grappled">Grappled</option>
-                                <option value="incapacitated">Incapacitated</option>
-                                <option value="invisible">Invisible</option>
                                 <option value="paralyzed">Paralyzed</option>
                                 <option value="petrified">Petrified</option>
-                                <option value="poisoned">Poisoned</option>
                                 <option value="prone">Prone</option>
                                 <option value="restrained">Restrained</option>
-                                <option value="stunned">Stunned</option>
-                                <option value="unconscious">Unconscious</option>
+                                <option value="sick">Sick</option>
+                                <option value="silenced">Silenced</option>
+                                <option value="slowed">Slowed</option>
+                                <option value="suffocating">Suffocating</option>
+                                <option value="wounded">Wounded</option>
                             </select>
                             <button type="button" onclick="InputFunctions.AddConditionInput()">Immune</button>
                             <div id="conditions-input-section">
@@ -364,27 +294,16 @@
                         <td id="damagetypes-form">
                             <label for="damagetypes-input">Damage Types:<br>
                                 <select id="damagetypes-input" onchange="FormFunctions.ShowHideDamageOther()">
-                                    <option value="acid">Acid</option>
                                     <option value="bludgeoning">Bludgeoning</option>
                                     <option value="cold">Cold</option>
+                                    <option value="corrosive">Corrosive</option>
                                     <option value="fire">Fire</option>
-                                    <option value="force">Force</option>
-                                    <option value="lightning">Lightning</option>
                                     <option value="necrotic">Necrotic</option>
                                     <option value="piercing">Piercing</option>
-                                    <option value="poison">Poison</option>
                                     <option value="psychic">Psychic</option>
-                                    <option value="radiant">Radiant</option>
+                                    <option value="shock">Shock</option>
                                     <option value="slashing">Slashing</option>
-                                    <option value="thunder">Thunder</option>
-                                    <option value="bludgeoning, piercing, and slashing from nonmagical attacks">
-                                        Nonmagical Attacks</option>
-                                    <option
-                                        value="bludgeoning, piercing, and slashing from nonmagical attacks that aren't silvered">
-                                        Non-Silvered Attacks</option>
-                                    <option
-                                        value="bludgeoning, piercing, and slashing from nonmagical attacks that aren't adamantine">
-                                        Non-Adamantine Attacks</option>
+                                    <option value="true">True</option>
                                     <option value="*">Other</option>
                                 </select>
                             </label>
@@ -404,31 +323,20 @@
                             <label for="languages-input">Languages:<br>
                                 <select id="languages-input" onchange="FormFunctions.ShowHideLanguageOther()">
                                     <option value="All">All</option>
-                                    <option value="Abyssal">Abyssal</option>
-                                    <option value="Aquan">Aquan</option>
-                                    <option value="Auran">Auran</option>
-                                    <option value="Celestial">Celestial</option>
                                     <option value="Common">Common</option>
-                                    <option value="Deep Speech">Deep Speech</option>
-                                    <option value="Draconic">Draconic</option>
-                                    <option value="Dwarvish">Dwarvish</option>
-                                    <option value="Elvish">Elvish</option>
-                                    <option value="Giant">Giant</option>
-                                    <option value="Gnomish">Gnomish</option>
-                                    <option value="Goblin">Goblin</option>
-                                    <option value="Halfling">Halfling</option>
-                                    <option value="Ignan">Ignan</option>
-                                    <option value="Infernal">Infernal</option>
-                                    <option value="Orc">Orc</option>
+                                    <option value="Dovan">Dovan</option>
+                                    <option value="Elemental">Elemental</option>
+                                    <option value="Minsasan">Minsasan</option>
                                     <option value="Primordial">Primordial</option>
+                                    <option value="Skrian">Skrian</option>
+                                    <option value="Soren">Soren</option>
                                     <option value="Sylvan">Sylvan</option>
-                                    <option value="Terran">Terran</option>
-                                    <option value="Undercommon">Undercommon</option>
+                                    <option value="Wild Speech">Wild Speech</option>
                                     <option value="*">Other</option>
                                 </select>
                             </label>
                             <label for="telepathy-input" style="margin-left: .5rem;">Telepathy:<br><input type="number"
-                                    id="telepathy-input" min="0" max="995" step="5" value="0"> ft.</label>
+                                    id="telepathy-input" min="0" max="995" step="5" value="0"> m.</label>
                             <div>
                                 <input id="other-language-input" type="text" value="">
                             </div>
@@ -450,33 +358,22 @@
                         <td>
                             <label for="blindsight-input">Blindsight: <input type="number" id="blindsight-input" min="0"
                                     max="995" step="5" value="0" onchange="FormFunctions.ShowHideBlindBox()">
-                                ft.</label><br>
+                                m.</label><br>
                             <div id="blind-box-note" class="box-note"><label for="blindness-input">(Blind beyond: <input
                                         type="checkbox" id="blindness-input">)</label></div>
                         </td>
                         <td><label for="darkvision-input">Darkvision: <input type="number" id="darkvision-input" min="0"
-                                    max="995" step="5" value="0"> ft.</label></td>
+                                    max="995" step="5" value="0"> m.</label></td>
                         <td><label for="tremorsense-input">Tremorsense: <input type="number" id="tremorsense-input"
-                                    min="0" max="995" step="5" value="0"> ft.</label></td>
+                                    min="0" max="995" step="5" value="0"> m.</label></td>
                         <td><label for="truesight-input">Truesight: <input type="number" id="truesight-input" min="0"
-                                    max="995" step="5" value="0"> ft.</label></td>
+                                    max="995" step="5" value="0"> m.</label></td>
                     </tr>
                 </table>
                 <br>
                 <div id="cr-form">
-                    <label for="cr-input">Challenge Rating:
-                        <select id="cr-input" onchange="InputFunctions.InputCR()"></select>
+                    <label for="cr-input">Challenge Rating: <input id="cr-input" type="number" value="" min="0" >
                     </label>
-                    <br>
-                    <div id="prof-bonus"></div>
-                    <div id="custom-cr">
-                        <label for="custom-cr-input">CR Text: <input id="custom-cr-input" type="text" value="1 (200 XP)"
-                                placeholder="Leave blank to hide" style="width: 16rem;"></label>
-                        <br>
-                        <label for="custom-prof-input">Proficiency Bonus: <input type="number" id="custom-prof-input"
-                                min="-99" max="99" value="2"></label>
-                    </div>
-                    <br>
                 </div>
                 <hr>
                 <div>
@@ -546,11 +443,11 @@
                     <button type="button" id="add-regional-button"
                         onclick="InputFunctions.AddAbilityInput('regionals')">Add Regional Effect</button>
                 </div>
-                <div>
+                <!-- <div>
                     <select id="common-ability-input"></select>
                     <button type="button" id="add-common-ability-button"
                         onclick="InputFunctions.AddCommonAbilityInput()">Use Preset</button>
-                </div>
+                </div> -->
                 <div>
                     <label for="format-helper-checkbox">Show Formatting Help: <input type="checkbox"
                             id="format-helper-checkbox" onclick="FormFunctions.ShowHideFormatHelper()"></label>
