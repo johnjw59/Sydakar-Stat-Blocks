@@ -265,8 +265,8 @@
                                 <option value="stealth">Stealth</option>
                                 <option value="survival">Survival</option>
                             </select>
-                            <button type="button" onclick="InputFunctions.AddSkillInput()">Proficient</button>
-                            <button type="button" onclick="InputFunctions.AddSkillInput(' (ex)')">Expert</button>
+                            <label for="skills-value">Value: <input type="number" id="skills-value" min="0" value=""></label>
+                            <button type="button" onclick="InputFunctions.AddSkillInput()">Add</button>
                             <div id="skills-input-section">
                                 <ul id="skills-input-list" class="statblock-list"></ul>
                             </div>

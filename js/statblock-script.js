@@ -668,6 +668,9 @@ var FormFunctions = {
             if (arrName == "languages") {
                 content = "<b>" + StringFunctions.FormatString(elementName + note, false) + (element.speaks || element.speaks == undefined ? "" : " (understands)") + "</b>";
             }
+            else if (arrName == "skills") {
+                content = "<b>" + StringFunctions.FormatString(elementName + ' (' + element.value + ')', false) + '</b>';
+            }
             else
                 content = "<b>" + StringFunctions.FormatString(elementName + note, false) + (element.hasOwnProperty("desc") ?
                     ":</b> " + StringFunctions.FormatString(element.desc, isBlock) : "</b>");
@@ -757,9 +760,13 @@ var InputFunctions = {
         FormFunctions.MakeDisplayList("sthrows", true);
     },
 
-    AddSkillInput: function (note) {
+    AddSkillInput: function () {
+        // Get value.
+        let value = $('#skills-value').val();
+        if (value == "") return;
+
         // Insert Alphabetically
-        GetVariablesFunctions.AddSkill($("#skills-input").val(), note);
+        GetVariablesFunctions.AddSkill($("#skills-input").val(), value);
 
         // Display
         FormFunctions.MakeDisplayList("skills", true);
@@ -1143,16 +1150,11 @@ var GetVariablesFunctions = {
             mon.sthrows.push(sthrowData);
     },
 
-    AddSkill: function (skillName, note) {
-        let skillData = ArrayFunctions.FindInList(data.allSkills, skillName);
-        if (skillData == null) return;
-
+    AddSkill: function (skillName, value) {
         let skill = {
-            "name": skillData.name,
-            "stat": skillData.stat
+            "name": skillName,
+            "value": value
         };
-        if (note)
-            skill["note"] = note;
         ArrayFunctions.ArrayInsert(mon.skills, skill, true);
     },
 
@@ -1377,8 +1379,7 @@ var StringFunctions = {
         // Skills
         for (let index = 0; index < mon.skills.length; index++) {
             let skillData = mon.skills[index];
-            skillsDisplayArr.push(StringFunctions.StringCapitalize(skillData.name) + " " +
-                StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon[skillData.stat + "Points"]) * (skillData.hasOwnProperty("note") ? 2 : 1)));
+            skillsDisplayArr.push(StringFunctions.StringCapitalize(skillData.name) + " (" + skillData.value + ")");
         }
 
         // Damage Types (It's not pretty but it does its job)
