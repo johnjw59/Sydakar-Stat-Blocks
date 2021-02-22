@@ -26,6 +26,7 @@ var mon = {
     affPoints: 5,
     blindsight: 0,
     blind: false,
+    lowlightvision: 0,
     darkvision: 0,
     tremorsense: 0,
     truesight: 0,
@@ -490,6 +491,7 @@ var FormFunctions = {
         $("#blindsight-input").val(mon.blindsight);
         $("#blindness-input").prop("checked", mon.blind);
         this.ShowHideBlindBox();
+        $("#lowlightvision-input").val(mon.lowlightvision);
         $("#darkvision-input").val(mon.darkvision);
         $("#tremorsense-input").val(mon.tremorsense);
         $("#truesight-input").val(mon.truesight);
@@ -893,6 +895,7 @@ var GetVariablesFunctions = {
         // Senses
         mon.blindsight = $("#blindsight-input").val();
         mon.blind = $("#blindness-input").prop("checked");
+        mon.lowlightvision = $("#lowlightvision-input").val();
         mon.darkvision = $("#darkvision-input").val();
         mon.tremorsense = $("#tremorsense-input").val();
         mon.truesight = $("#truesight-input").val();
@@ -1036,6 +1039,7 @@ var GetVariablesFunctions = {
         // Senses
         mon.blindsight = 0;
         mon.blind = false;
+        mon.lowlightvision = 0;
         mon.darkvision = 0;
         mon.tremorsense = 0;
         mon.truesight = 0;
@@ -1048,6 +1052,9 @@ var GetVariablesFunctions = {
                 case "blindsight":
                     mon.blindsight = senseDist;
                     mon.blind = senseString.toLowerCase().includes("blind beyond");
+                    break;
+                case "lowlightvision":
+                    mon.lowlightvision = senseDist;
                     break;
                 case "darkvision":
                     mon.darkvision = senseDist;
@@ -1360,6 +1367,7 @@ var StringFunctions = {
     GetSenses: function () {
         let sensesDisplayArr = [];
         if (mon.blindsight > 0) sensesDisplayArr.push("blindsight " + mon.blindsight + " m." + (mon.blind ? " (blind beyond this radius)" : ""));
+        if (mon.lowlightvision > 0) sensesDisplayArr.push('lowlightvision ' + mon.lowlightvision + " m.");
         if (mon.darkvision > 0) sensesDisplayArr.push("darkvision " + mon.darkvision + " m.");
         if (mon.tremorsense > 0) sensesDisplayArr.push("tremorsense " + mon.tremorsense + " m.");
         if (mon.truesight > 0) sensesDisplayArr.push("truesight " + mon.truesight + " m.");
