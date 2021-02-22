@@ -120,7 +120,6 @@ var SavedData = {
     // Retrieving
 
     RetrieveFromLocalStorage: function () {
-        return undefined;
         let savedData = localStorage.getItem("SavedData");
         if (savedData != undefined)
             mon = JSON.parse(savedData);
