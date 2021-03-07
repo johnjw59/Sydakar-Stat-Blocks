@@ -18,7 +18,7 @@ var mon = {
     speedDesc: "10 m.",
     strPoints: 5,
     agiPoints: 5,
-    perPoints: 5,
+    prePoints: 5,
     conPoints: 5,
     intPoints: 5,
     insPoints: 5,
@@ -184,7 +184,7 @@ function UpdateStatblock(moveSeparationPoint) {
         $(id).html(pts);
     setPts("#strpts", mon.strPoints);
     setPts("#agipts", mon.agiPoints);
-    setPts("#perpts", mon.perPoints);
+    setPts("#prepts", mon.prePoints);
     setPts("#conpts", mon.conPoints);
     setPts("#intpts", mon.intPoints);
     setPts("#inspts", mon.insPoints);
@@ -479,7 +479,7 @@ var FormFunctions = {
         // Stats
         this.SetStatForm("str", mon.strPoints);
         this.SetStatForm("agi", mon.agiPoints);
-        this.SetStatForm("per", mon.perPoints);
+        this.SetStatForm("pre", mon.prePoints);
         this.SetStatForm("con", mon.conPoints);
         this.SetStatForm("int", mon.intPoints);
         this.SetStatForm("ins", mon.insPoints);
@@ -884,7 +884,7 @@ var GetVariablesFunctions = {
         // Stats
         mon.strPoints = $("#str-input").val();
         mon.agiPoints = $("#agi-input").val();
-        mon.perPoints = $("#per-input").val();
+        mon.prePoints = $("#pre-input").val();
         mon.conPoints = $("#con-input").val();
         mon.intPoints = $("#int-input").val();
         mon.insPoints = $("#ins-input").val();
@@ -944,7 +944,7 @@ var GetVariablesFunctions = {
         // Stats
         mon.strPoints = preset.strength;
         mon.agiPoints = preset.agility;
-        mon.perPoints = preset.perception;
+        mon.prePoints = preset.precision;
         mon.conPoints = preset.constitution;
         mon.intPoints = preset.intelligence;
         mon.insPoints = preset.insight;
