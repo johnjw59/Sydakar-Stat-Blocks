@@ -1349,7 +1349,7 @@ var StringFunctions = {
     GetHP: function () {
         if (mon.customHP)
             return mon.customHP;
-        return (2 * MathFunctions.PointsToBonus(mon.conPoints)) + parseInt(mon.size);
+        return MathFunctions.PointsToBonus(mon.conPoints) + parseInt(mon.size);
     },
 
     GetSpeed: function () {
