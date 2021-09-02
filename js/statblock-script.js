@@ -14,6 +14,7 @@ var mon = {
     hover: false,
     swimSpeed: 0,
     customHP: null,
+    customResolve: null,
     customSpeed: false,
     speedDesc: "10 m.",
     strPoints: 5,
@@ -24,6 +25,7 @@ var mon = {
     insPoints: 5,
     chaPoints: 5,
     affPoints: 5,
+    wilPoints: 5,
     blindsight: 0,
     blind: false,
     lowlightvision: 0,
@@ -176,6 +178,9 @@ function UpdateStatblock(moveSeparationPoint) {
     // Hit Points
     $("#hit-points").html(StringFunctions.FormatString(StringFunctions.RemoveHtmlTags(StringFunctions.GetHP())));
 
+    // Resolve
+    $("#res-points").html(StringFunctions.FormatString(StringFunctions.RemoveHtmlTags(StringFunctions.GetResolve())));
+
     // Speed
     $("#speed").html(StringFunctions.FormatString(StringFunctions.RemoveHtmlTags(StringFunctions.GetSpeed())));
 
@@ -190,6 +195,7 @@ function UpdateStatblock(moveSeparationPoint) {
     setPts("#inspts", mon.insPoints);
     setPts("#chapts", mon.chaPoints);
     setPts("#affpts", mon.affPoints);
+    setPts("#wilpts", mon.wilPoints);
 
     let propertiesDisplayArr = StringFunctions.GetPropertiesDisplayArr();
 
@@ -381,7 +387,7 @@ function TryMarkdown() {
     let markdown = ['<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>', mon.name, '</title><link rel="shortcut icon" type="image/x-icon" href="./dndimages/favicon.ico" /></head><body><h2>Homebrewery/GM Binder Markdown</h2><code>', mon.doubleColumns ? "___<br>___<br>" : "___<br>", '> ## ', mon.name, '<br>>*', sizeLabels[mon.size], ' ', mon.type];
     if (mon.tag != "")
         markdown.push(' (', mon.tag, ')');
-    markdown.push(', ', mon.alignment, '*<br>>___<br>> - **Armor Value** ', StringFunctions.FormatString(StringFunctions.GetArmorData()), '<br>> - **Hit Points** ', StringFunctions.GetHP(), '<br>> - **Speed** ', StringFunctions.GetSpeed(), "<br>>___<br>>|STR|DEX|CON|INT|WIS|CHA|<br>>|:---:|:---:|:---:|:---:|:---:|:---:|<br>>|",
+    markdown.push(', ', mon.alignment, '*<br>>___<br>> - **Armor Value** ', StringFunctions.FormatString(StringFunctions.GetArmorData()), '<br>> - **Hit Points** ', StringFunctions.GetHP(), '<br>> - **Resolve** ', StringFunctions.GetResolve(), '<br>> - **Speed** ', StringFunctions.GetSpeed(), "<br>>___<br>>|STR|DEX|CON|INT|WIS|CHA|<br>>|:---:|:---:|:---:|:---:|:---:|:---:|<br>>|",
         mon.strPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.strPoints)), ")|",
         mon.agiPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.agiPoints)), ")|",
         mon.perPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.perPoints)), ")|",
@@ -389,7 +395,8 @@ function TryMarkdown() {
         mon.intPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.intPoints)), ")|",
         mon.insPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.insPoints)), ")|",
         mon.chaPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.chaPoints)), ")|",
-        mon.affPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.affPoints)), ")|<br>>___<br>");
+        mon.affPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.affPoints)), ")|",
+        mon.wilPoints, " (", StringFunctions.BonusFormat(MathFunctions.PointsToBonus(mon.wilPoints)), ")|<br>>___<br>");
 
     let propertiesDisplayArr = StringFunctions.GetPropertiesDisplayArr();
 
@@ -462,6 +469,7 @@ var FormFunctions = {
         // Armor & HP
         $("#armor-input").val(mon.armor);
         $("#hp-text-input").val(mon.customHP);
+        $("#res-test-input").va(mon.customResolve);
         this.UpdateHitDie();
 
         // Speeds
@@ -485,6 +493,7 @@ var FormFunctions = {
         this.SetStatForm("ins", mon.insPoints);
         this.SetStatForm("cha", mon.chaPoints);
         this.SetStatForm("aff", mon.affPoints);
+        this.SetStatForm("wil", mon.wilPoints);
 
         // Senses
         $("#blindsight-input").val(mon.blindsight);
@@ -871,6 +880,9 @@ var GetVariablesFunctions = {
         // Hit Points
         mon.customHP = $("#hp-custom-input").val();
 
+        // Resolve
+        mon.customResolve = $("#res-custom-input").val();
+
         // Speeds
         mon.speed = $("#speed-input").val();
         mon.burrowSpeed = $("#burrow-speed-input").val();
@@ -890,6 +902,7 @@ var GetVariablesFunctions = {
         mon.insPoints = $("#ins-input").val();
         mon.chaPoints = $("#cha-input").val();
         mon.affPoints = $("#aff-input").val();
+        mon.wilPoints = $("#wil-input").val();
 
         // Senses
         mon.blindsight = $("#blindsight-input").val();
@@ -950,6 +963,7 @@ var GetVariablesFunctions = {
         mon.insPoints = preset.insight;
         mon.chaPoints = preset.charisma;
         mon.affPoints = preset.affinity;
+        mon.wilPoints = preset.willpower;
 
         // CR
         mon.cr = preset.challenge_rating;
@@ -957,6 +971,7 @@ var GetVariablesFunctions = {
         // HP & Armor
         mon.armor = preset.armor;
         mon.customHP = preset.customHP;
+        mon.customResolve = preset.customResolve;
 
         // Speeds
         let GetSpeed = (speedList, speedType) => speedList.hasOwnProperty(speedType) ? parseInt(speedList[speedType]) : 0;
@@ -1350,6 +1365,13 @@ var StringFunctions = {
         if (mon.customHP)
             return mon.customHP;
         return MathFunctions.PointsToBonus(mon.conPoints) + parseInt(mon.size);
+    },
+
+    // Get the string displayed for the monster's HP
+    GetResolve: function () {
+        if (mon.customResolve)
+            return mon.customResolve;
+        return MathFunctions.PointsToBonus(mon.wilPoints) * 2;
     },
 
     GetSpeed: function () {

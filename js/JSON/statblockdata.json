@@ -23,7 +23,7 @@
 		{
 			"name": "cha",
 			"order": 5
-		}
+		},
 	],
 	"statNames": [
 		"str",
@@ -395,6 +395,7 @@
 		"insight": 5,
 		"charisma": 5,
 		"affinity": 5,
+		"willpower": 5,
 		"skills": {},
 		"damage_vulnerabilities": "",
 		"damage_resistances": "",
