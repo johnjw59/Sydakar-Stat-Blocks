@@ -1364,7 +1364,7 @@ var StringFunctions = {
     GetHP: function () {
         if (mon.customHP)
             return mon.customHP;
-        return MathFunctions.PointsToBonus(mon.conPoints) + parseInt(mon.size);
+        return parseInt(MathFunctions.PointsToBonus(mon.conPoints)) + parseInt(mon.size);
     },
 
     // Get the string displayed for the monster's HP
