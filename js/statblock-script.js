@@ -2,7 +2,7 @@ var data;
 
 var mon = {
     name: "Monster",
-    size: 6,
+    size: 12,
     type: "humanoid",
     tag: "",
     alignment: "any alignment",
@@ -66,13 +66,13 @@ var mon = {
 
 var sizeLabels = {
    0: 'Miniscule',
-   2: 'Tiny',
-   4: 'Small',
-   6: 'Medium',
-   10: 'Large',
-   14: 'Huge',
-   20: 'Enormous',
-   30: 'Colossal',
+   4: 'Tiny',
+   8: 'Small',
+   12: 'Medium',
+   20: 'Large',
+   28: 'Huge',
+   40: 'Enormous',
+   60: 'Colossal',
 };
 
 // Save function
@@ -1381,7 +1381,7 @@ var StringFunctions = {
     GetHP: function () {
         if (mon.customHP)
             return mon.customHP;
-        return parseInt(MathFunctions.PointsToBonus(mon.conPoints)) + parseInt(mon.size);
+        return (2 * parseInt(MathFunctions.PointsToBonus(mon.conPoints))) + parseInt(mon.size);
     },
 
     // Get the string displayed for the monster's HP
