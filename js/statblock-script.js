@@ -476,7 +476,7 @@ var FormFunctions = {
         // Armor & HP
         $("#armor-input").val(mon.armor);
         $("#hp-text-input").val(mon.customHP);
-        $("#res-test-input").va(mon.customResolve);
+        $("#res-test-input").val(mon.customResolve);
         this.UpdateHitDie();
 
         // Initiative
