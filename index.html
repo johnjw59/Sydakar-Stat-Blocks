@@ -57,6 +57,14 @@
                                 <h4>Resolve</h4>
                                 <p id="res-points"></p>
                             </div> <!-- property line -->
+                            <div class="property-line">
+                                <h4>Initiative</h4>
+                                <p id="initiative-points"></p>
+                            </div> <!-- property line -->
+                            <div class="property-line">
+                                <h4>Initiative Die</h4>
+                                <p id="initiative-die-points"></p>
+                            </div> <!-- property line -->
                             <div class="property-line last">
                                 <h4>Speed</h4>
                                 <p id="speed"></p>
@@ -192,14 +200,24 @@
                             <div id="hp-custom-input-prompt"><label for="hp-custom-input">Endurance:<br><input
                                         id="hp-custom-input" type="number" min="0"></label></div>
                             <div class="box-note">Leave empty to calculate endurance automatically.</div>
-                        <td>
+                        </td>
                         <td>
                             <div id="res-custom-input-prompt"><label for="res-custom-input">Resolve:<br><input id="res-custom-input"
                                         type="number" min="0"></label></div>
                             <div class="box-note">Leave empty to calculate resolve automatically.</div>
+                        </td>
                         <td>
                             <label for="armor-input">Armor Value: <br>
                                 <input id="armor-input" type="number" min="0" max="99"></label>
+                        </td>
+                        <td>
+                            <div id="initiative-input-prompt"><label for="initiative-input">Initiative:<br><input
+                                        id="initiative-input" type="number" min="0"></label></div>
+                            <div class="box-note">Leave empty to calculate initiative automatically.</div>
+                        </td>
+                        <td>
+                            <div id="initiative-die-input-prompt"><label for="initiative-die-input">Initiative Die:<br><input
+                                        id="initiative-die-input" type="number" min="0"></label></div>
                         </td>
                     </tr>
                 </table>

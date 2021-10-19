@@ -7,6 +7,8 @@ var mon = {
     tag: "",
     alignment: "any alignment",
     armor: 5,
+    initiative: 5,
+    initiativeDie: 5,
     speed: 10,
     burrowSpeed: 0,
     climbSpeed: 0,
@@ -16,6 +18,7 @@ var mon = {
     customHP: null,
     customResolve: null,
     customSpeed: false,
+    customInitiative: null,
     speedDesc: "10 m.",
     strPoints: 5,
     agiPoints: 5,
@@ -180,6 +183,10 @@ function UpdateStatblock(moveSeparationPoint) {
 
     // Resolve
     $("#res-points").html(StringFunctions.FormatString(StringFunctions.RemoveHtmlTags(StringFunctions.GetResolve())));
+
+    // Initiative
+    $('#initiative-points').html(StringFunctions.FormatString(StringFunctions.RemoveHtmlTags(StringFunctions.GetInitiative())));
+    $('#initiative-die-points').html(mon.initiativeDie);
 
     // Speed
     $("#speed").html(StringFunctions.FormatString(StringFunctions.RemoveHtmlTags(StringFunctions.GetSpeed())));
@@ -471,6 +478,10 @@ var FormFunctions = {
         $("#hp-text-input").val(mon.customHP);
         $("#res-test-input").va(mon.customResolve);
         this.UpdateHitDie();
+
+        // Initiative
+        $("#initiative-input").val(mon.customInitiative);
+        $("#initiative-die-input").val(mon.initiativeDie);
 
         // Speeds
         $("#speed-input").val(mon.speed);
@@ -877,11 +888,13 @@ var GetVariablesFunctions = {
         // Armor Class
         mon.armor = $("#armor-input").val();
 
-        // Hit Points
+        // Hit Points and Resolve
         mon.customHP = $("#hp-custom-input").val();
-
-        // Resolve
         mon.customResolve = $("#res-custom-input").val();
+
+        // Initiative
+        mon.initiative = $("#initiative-input").val();
+        mon.initiativeDie = $("#initiative-die-input").val();
 
         // Speeds
         mon.speed = $("#speed-input").val();
@@ -972,6 +985,10 @@ var GetVariablesFunctions = {
         mon.armor = preset.armor;
         mon.customHP = preset.customHP;
         mon.customResolve = preset.customResolve;
+
+        // Initiative
+        mon.initiative = preset.customInitiative;
+        mon.initiativeDie = preset.initiativeDie;
 
         // Speeds
         let GetSpeed = (speedList, speedType) => speedList.hasOwnProperty(speedType) ? parseInt(speedList[speedType]) : 0;
@@ -1372,6 +1389,16 @@ var StringFunctions = {
         if (mon.customResolve)
             return mon.customResolve;
         return MathFunctions.PointsToBonus(mon.wilPoints) * 2;
+    },
+
+    GetInitiative: function () {
+        if (mon.customInitiative)
+            return mon.customInitiative;
+        return (26 - (parseInt(MathFunctions.PointsToBonus(mon.insPoints)) + parseInt(MathFunctions.PointsToBonus(mon.agiPoints)))) / 2
+    },
+
+    GetInitiativeDie: function () {
+        return mon.initiativeDie;
     },
 
     GetSpeed: function () {
