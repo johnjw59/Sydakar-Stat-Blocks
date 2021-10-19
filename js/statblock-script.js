@@ -1388,7 +1388,7 @@ var StringFunctions = {
     GetResolve: function () {
         if (mon.customResolve)
             return mon.customResolve;
-        return MathFunctions.PointsToBonus(mon.wilPoints) * 2;
+        return MathFunctions.PointsToBonus(mon.wilPoints) * 4;
     },
 
     GetInitiative: function () {
