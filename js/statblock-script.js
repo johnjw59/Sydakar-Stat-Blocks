@@ -1394,7 +1394,7 @@ var StringFunctions = {
     GetInitiative: function () {
         if (mon.customInitiative)
             return mon.customInitiative;
-        return (26 - (parseInt(MathFunctions.PointsToBonus(mon.insPoints)) + parseInt(MathFunctions.PointsToBonus(mon.agiPoints)))) / 2
+        return 26 - ((parseInt(MathFunctions.PointsToBonus(mon.insPoints)) + parseInt(MathFunctions.PointsToBonus(mon.agiPoints))) / 2)
     },
 
     GetInitiativeDie: function () {
