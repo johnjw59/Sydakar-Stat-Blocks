@@ -7,7 +7,6 @@ var mon = {
     tag: "",
     alignment: "any alignment",
     armor: 5,
-    initiative: 5,
     initiativeDie: 5,
     speed: 10,
     burrowSpeed: 0,
@@ -893,7 +892,7 @@ var GetVariablesFunctions = {
         mon.customResolve = $("#res-custom-input").val();
 
         // Initiative
-        mon.initiative = $("#initiative-input").val();
+        mon.customInitiative = $("#initiative-input").val();
         mon.initiativeDie = $("#initiative-die-input").val();
 
         // Speeds
@@ -987,7 +986,7 @@ var GetVariablesFunctions = {
         mon.customResolve = preset.customResolve;
 
         // Initiative
-        mon.initiative = preset.customInitiative;
+        mon.customInitiative = preset.customInitiative;
         mon.initiativeDie = preset.initiativeDie;
 
         // Speeds
